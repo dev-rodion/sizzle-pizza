@@ -2,17 +2,17 @@ import e, { NextFunction, Request, Response } from "express";
 import { User } from "../models";
 import bcrypt from 'bcryptjs';
 import { CustomError, ErrorFactory } from "../errors";
-import { ErrorNames } from "../errors/ErrorName";
+import { ErrorName, ErrorNames } from "../errors/ErrorName";
 import { IErrorFactory, IUser } from "../interfaces";
 import generateToken from "../utils/generateToken";
+import { validation } from "../validation";
 
 const errorsFactory: IErrorFactory = new ErrorFactory();
 
 export const registerUser = async (req: Request, res: Response) => {
-    if (!req.body.username || !req.body.email || !req.body.password || !req.body.passwordRepeat) {
-        console.log(req.body);
-        
-        const error: CustomError = errorsFactory.createError(ErrorNames.MISSING_PARAMETERS);
+    const validationError: ErrorName | null = validation.register(req.body);
+    if (validationError !== null) {
+        const error: CustomError = errorsFactory.createError(validationError);
         return error.returnError(res);
     }
 
@@ -48,8 +48,9 @@ export const registerUser = async (req: Request, res: Response) => {
 }
 
 export const loginUser = async (req: Request, res: Response) => {
-    if (!req.body.email || !req.body.password) {
-        const error: CustomError = errorsFactory.createError(ErrorNames.MISSING_PARAMETERS);
+    const validationError: ErrorName | null = validation.login(req.body);
+    if (validationError !== null) {
+        const error: CustomError = errorsFactory.createError(validationError);
         return error.returnError(res);
     }
 
