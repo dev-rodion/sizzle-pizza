@@ -25,6 +25,14 @@ class ErrorFactory implements IErrorFactory {
                 return new CustomError('Invalid token', 401);
             case 'InvalidPassword':
                 return new CustomError('Invalid password', 400);
+            case 'UsernameInvalid':
+                return new CustomError('Username invalid', 400);
+            case 'EmailInvalid':
+                return new CustomError('Email invalid', 400);
+            case 'PasswordInvalid':
+                return new CustomError('Password invalid', 400);
+            case 'PasswordRepeatInvalid':
+                return new CustomError('Password repeat invalid', 400);
             default:
                 return new CustomError('Unknown error', 500);
         }
