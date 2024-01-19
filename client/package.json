@@ -3,11 +3,11 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll"
+    "start": "expo start --port 19000",
+    "android": "expo start --android --port 19000",
+    "ios": "expo start --ios --port 19000",
+    "web": "expo start --web --port 19000",
+    "test": "jest --watchAll --port 19000"
   },
   "jest": {
     "preset": "jest-expo"
