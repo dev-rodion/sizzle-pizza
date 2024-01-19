@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import verifyToken from "../utils/verifyToken";
 import { ErrorFactory } from "../errors";
-import { IErrorFactory, IUser } from "../interfaces";
+import { IErrorFactory } from "../interfaces";
 import { ErrorNames } from "../errors/ErrorName";
 
 const errorsFactory: IErrorFactory = new ErrorFactory();
