@@ -1,85 +1,81 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
+import { Link } from "expo-router";
+import styles from "./_styles";
 
 const Login = () => {
+  const hadleLogin = async () => {
+    console.log("====================================");
+    console.log(
+      JSON.stringify({
+        email,
+        password,
+      })
+    );
+    console.log("====================================");
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
+    <View style={styles.container}>
+      <Text style={[styles.headline]}>Login here</Text>
+      <Text style={styles.bodyText}>Welcome back!</Text>
+
+      <View style={styles.formWrapper}>
         <TextInput
           mode="outlined"
           label="Email"
-          value={email}
           style={styles.input}
-          onChangeText={(e) => {
-            setEmail(e);
+          outlineStyle={styles.inputOutline}
+          value={email}
+          onChangeText={(value) => {
+            setEmail(value);
           }}
         />
         <TextInput
           mode="outlined"
-          label="Password"
-          value=""
           style={styles.input}
-          onChangeText={() => { }}
+          outlineStyle={styles.inputOutline}
+          label="Password"
+          value={password}
+          onChangeText={(value) => {
+            setPassword(value);
+          }}
         />
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
         <Button
-          mode="contained"
-          onPress={() => { }}
           style={styles.button}
           labelStyle={styles.buttonLabel}
+          mode="contained"
+          onPress={hadleLogin}
         >
           Login
         </Button>
+        <Link href="/auth/register" style={styles.buttomLink}>
+          <Text style={styles.bottomLinkText}>Create an account</Text>
+        </Link>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 15,
-  },
-  container: {
-    width: "100%",
-    maxWidth: 350,
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 30,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-  },
-  title: {
-    fontWeight: "700",
-    marginBottom: 20,
-    fontSize: 24,
-  },
-  input: {
-    width: "100%",
-    marginBottom: 20,
-  },
-  forgotPassword: {
-    marginLeft: "auto",
-    marginBottom: 20,
-  },
-  button: {
-    width: "100%",
-    marginBottom: 20,
-    justifyContent: "center",
-  },
-  buttonLabel: {
-    fontSize: 18,
-    textTransform: "uppercase",
-    color: "#fff",
-    padding: 7.5,
-  },
-});
