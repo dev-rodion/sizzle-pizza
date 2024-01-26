@@ -1,5 +1,4 @@
 import { Tabs } from "expo-router";
-import { Header } from "../components";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { PaperProvider } from "react-native-paper";
@@ -8,6 +7,7 @@ import colors from "../constants/Colors";
 import Theme from "../constants/Theme";
 import Layout from "../constants/Layout";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Header from "../components/Header";
 
 const AppLayout = () => {
   return (

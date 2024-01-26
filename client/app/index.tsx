@@ -5,7 +5,7 @@ import Layout from "../constants/Layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
 
-const App = () => {
+export default function App() {
   return (
     <ScrollView style={{ backgroundColor: Colors.background }}>
       <SafeAreaView
@@ -22,6 +22,6 @@ const App = () => {
       </SafeAreaView>
     </ScrollView>
   );
-};
+}
 
 export default App;
