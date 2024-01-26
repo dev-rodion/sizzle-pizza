@@ -1,10 +1,10 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import { authRoutes } from './routes';
 import { authenticate, logger } from './middleware';
 import connectDB from './db';
 import { checkEnvVariables, envVariables } from './utils/envVariables';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -16,6 +16,7 @@ if (!process.env.JWT_SECRET || !process.env.JWT_EXPIRES_IN || !process.env.MONGO
 }
 
 const app: Express = express();
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 

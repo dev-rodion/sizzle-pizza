@@ -4,8 +4,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import Layout from "../constants/Layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
+import { useEffect, useState } from "react";
 
-export default function App() {
+const App = () => {
+  const [data, setData] = useState(null);
+
   return (
     <ScrollView style={{ backgroundColor: Colors.background }}>
       <SafeAreaView
@@ -22,6 +25,6 @@ export default function App() {
       </SafeAreaView>
     </ScrollView>
   );
-}
+};
 
 export default App;

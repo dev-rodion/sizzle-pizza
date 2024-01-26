@@ -1,39 +1,44 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import styles from "./_styles";
+import Colors from "../../constants/Colors";
+import Theme from "../../constants/Theme";
+import * as SecureStore from "expo-secure-store";
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
   const hadleLogin = async () => {
-    console.log("====================================");
-    console.log(
-      JSON.stringify({
-        email,
-        password,
-      })
-    );
-    console.log("====================================");
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("http://10.0.2.2:3000/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      return data;
+
+      if (data.hasOwnProperty("message")) {
+        return setError(data.message);
+      }
+
+      if (data.hasOwnProperty("token")) {
+        await SecureStore.setItemAsync("userToken", data.token);
+        setEmail("");
+        setPassword("");
+        setError("");
+        router.replace("/");
+        return;
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -62,6 +67,32 @@ const Login = () => {
           }}
         />
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
+        {error && (
+          <View
+            style={{
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+              padding: 10,
+              backgroundColor: Colors.errorContainer,
+              height: 45,
+              borderRadius: Theme.borderRadius,
+              borderWidth: 1,
+              borderColor: Colors.error,
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.error,
+                fontWeight: "700",
+              }}
+            >
+              {error}
+            </Text>
+          </View>
+        )}
+
         <Button
           style={styles.button}
           labelStyle={styles.buttonLabel}
