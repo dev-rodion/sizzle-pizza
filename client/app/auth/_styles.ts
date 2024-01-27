@@ -53,19 +53,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingHorizontal: 10,
   },
-  input: {
-    marginTop: 20,
-    fontSize: FontSize.medium,
-  },
-  invalid_input: {
-    borderColor: Colors.error,
-    color: Colors.error,
-  },
-  inputOutline: {
-    borderRadius: Theme.borderRadius,
-    backgroundColor: Colors.surfaceVariant,
-    padding: 10,
-  },
   forgotPassword: {
     textAlign: "right",
     color: Colors.primary,
@@ -83,8 +70,28 @@ const styles = StyleSheet.create({
   bottomLinkText: {
     fontWeight: "700",
     fontSize: FontSize.medium,
-
-  }
+  },
+  errorBox: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: Colors.errorContainer,
+    height: 45,
+    borderRadius: Theme.borderRadius,
+    borderWidth: 1,
+    borderColor: Colors.error,
+  },
+  errorText: {
+    color: Colors.error,
+    fontWeight: "700",
+    fontSize: FontSize.medium,
+  },
+  loadingWrapper: {
+    flex: 1,
+    justifyContent: "center",
+  },
 });
 
 export default styles;

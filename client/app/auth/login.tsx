@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, HelperText, Text, TextInput } from "react-native-paper";
+import { ActivityIndicator, Button, Text } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
 import styles from "./_styles";
-import Colors from "../../constants/Colors";
-import Theme from "../../constants/Theme";
 import * as SecureStore from "expo-secure-store";
-import { jwtDecode } from "jwt-decode";
 import {
   IValidation,
   validateEmail,
   validatePassword,
 } from "../../utils/validation";
+import { loginUser } from "../../api/auth";
+import { FormInput } from "../../components";
 
 const Login = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("Karas132@");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [emailValidationResult, setEmailValidationResult] = useState({
     isValid: true,
@@ -29,22 +30,34 @@ const Login = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    setEmailValidationResult(validateEmail(email));
-  }, [email]);
-  useEffect(() => {
-    setPasswordValidationResult(validatePassword(password));
-  }, [password]);
+  const formIsValid = () => {
+    const emailValidation = validateEmail(email);
+    const passwordValidation = validatePassword(password);
 
-  const hadleLogin = async () => {
+    setEmailValidationResult(emailValidation);
+    setPasswordValidationResult(passwordValidation);
+
+    return emailValidation.isValid && passwordValidation.isValid;
+  };
+
+  const handleLogin = useCallback(async () => {
+    setError("");
+
+    if (!formIsValid()) {
+      return;
+    }
+
+    setIsLoaded(false);
+
     try {
-      const response = await fetch("http://10.0.2.2:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const timeout = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          setIsLoaded(true);
+          setError("Request timed out");
+        }, 5000);
       });
-      const data = await response.json();
 
+      const data = await Promise.race([loginUser(email, password), timeout]); // use the new function
       if (data.hasOwnProperty("message")) {
         return setError(data.message);
       }
@@ -56,10 +69,22 @@ const Login = () => {
         setError("");
         router.replace("/");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setError(error.message);
     }
-  };
+  }, [email, password]);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) {
+    return (
+      <View style={styles.loadingWrapper}>
+        <ActivityIndicator animating={true} size={"large"} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -67,58 +92,31 @@ const Login = () => {
       <Text style={styles.bodyText}>Welcome back!</Text>
 
       <View style={styles.formWrapper}>
-        <TextInput
-          mode="outlined"
+        <FormInput
           label="Email"
-          style={[styles.input]}
-          outlineStyle={[styles.inputOutline]}
           value={email}
-          onChangeText={(value) => {
+          onChange={(value) => {
             setEmail(value);
+            setEmailValidationResult(validateEmail(value));
           }}
           error={!emailValidationResult.isValid}
+          errorMessage={emailValidationResult.message}
         />
-        <HelperText type="error" visible={!emailValidationResult.isValid}>
-          {emailValidationResult.message}
-        </HelperText>
-        <TextInput
-          mode="outlined"
-          style={styles.input}
-          outlineStyle={styles.inputOutline}
+        <FormInput
           label="Password"
           value={password}
-          onChangeText={(value) => {
+          onChange={(value) => {
             setPassword(value);
+            setPasswordValidationResult(validatePassword(value));
           }}
           error={!passwordValidationResult.isValid}
+          errorMessage={passwordValidationResult.message}
+          secureTextEntry={true}
         />
-        <HelperText type="error" visible={!passwordValidationResult.isValid}>
-          {passwordValidationResult.message}
-        </HelperText>
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
         {error && (
-          <View
-            style={{
-              width: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 20,
-              padding: 10,
-              backgroundColor: Colors.errorContainer,
-              height: 45,
-              borderRadius: Theme.borderRadius,
-              borderWidth: 1,
-              borderColor: Colors.error,
-            }}
-          >
-            <Text
-              style={{
-                color: Colors.error,
-                fontWeight: "700",
-              }}
-            >
-              {error}
-            </Text>
+          <View style={styles.errorBox}>
+            <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
 
@@ -126,7 +124,7 @@ const Login = () => {
           style={styles.button}
           labelStyle={styles.buttonLabel}
           mode="contained"
-          onPress={hadleLogin}
+          onPress={handleLogin}
         >
           Login
         </Button>

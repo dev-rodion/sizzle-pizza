@@ -1,12 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import { Appbar, Avatar } from "react-native-paper";
-import { Entypo } from "@expo/vector-icons";
-import { Router, useNavigation, useRouter } from "expo-router";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { useDispatch } from "react-redux";
-import { setShowBackButton } from "../redux/features/menuFeatureSlice";
+import { Appbar } from "react-native-paper";
+import { Router, useRouter } from "expo-router";
 import Layout from "../constants/Layout";
 
 const Header = () => {

@@ -1,2 +1,2 @@
-export {default as TopBar} from './TopBar';
-export {default as BottomBar} from './ButtomBar';
+export { default as Header } from "./Header";
+export { default as FormInput } from "./Common/FormInput";
