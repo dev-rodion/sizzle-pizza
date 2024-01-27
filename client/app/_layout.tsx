@@ -8,8 +8,38 @@ import Theme from "../constants/Theme";
 import Layout from "../constants/Layout";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "../components/Header";
+import { decode } from "base-64";
+import { useEffect } from "react";
+import * as SecureStore from "expo-secure-store";
+import { jwtDecode } from "jwt-decode";
+import {
+  IStateUserFeature,
+  setToken,
+  setUserData,
+} from "../redux/features/userFeatureSlice";
 
 const AppLayout = () => {
+  global.atob = decode;
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await SecureStore.getItemAsync("userToken");
+      if (token) {
+        const decodedToken: { _id: string; email: string; username: string, exp: number, iat: number } =
+          jwtDecode(token);
+        store.dispatch(setToken(token));
+        const userData: IStateUserFeature = {
+          _id: decodedToken._id,
+          email: decodedToken.email,
+          username: decodedToken.username,
+          token: token,
+        };
+        store.dispatch(setUserData(userData));
+      }
+    };
+    checkToken();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <Provider store={store}>

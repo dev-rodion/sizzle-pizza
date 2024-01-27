@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import menuFeatureSlice from './features/menuFeatureSlice';
+import userFeatureSlice from './features/userFeatureSlice';
 
 export const store = configureStore({
   reducer: {
-    menuFeature: menuFeatureSlice,
+    userFeature: userFeatureSlice,
   },
 });
 

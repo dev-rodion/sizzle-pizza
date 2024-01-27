@@ -4,11 +4,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import Layout from "../constants/Layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
-import { useEffect, useState } from "react";
 
 const App = () => {
-  const [data, setData] = useState(null);
-
   return (
     <ScrollView style={{ backgroundColor: Colors.background }}>
       <SafeAreaView
@@ -19,7 +16,7 @@ const App = () => {
         }}
       >
         <Text variant="displayMedium">Home Page</Text>
-        <Link href="/auth/login">
+        <Link href="/auth/register">
           <Text variant="bodyLarge">Login</Text>
         </Link>
       </SafeAreaView>

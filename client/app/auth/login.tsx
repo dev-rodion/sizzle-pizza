@@ -1,18 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, HelperText, Text, TextInput } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
 import styles from "./_styles";
 import Colors from "../../constants/Colors";
 import Theme from "../../constants/Theme";
 import * as SecureStore from "expo-secure-store";
+import { jwtDecode } from "jwt-decode";
+import {
+  IValidation,
+  validateEmail,
+  validatePassword,
+} from "../../utils/validation";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("Karas132@");
+
+  const [emailValidationResult, setEmailValidationResult] = useState({
+    isValid: true,
+    message: "",
+  } as IValidation);
+  const [passwordValidationResult, setPasswordValidationResult] = useState({
+    isValid: true,
+    message: "",
+  } as IValidation);
 
   const router = useRouter();
+
+  useEffect(() => {
+    setEmailValidationResult(validateEmail(email));
+  }, [email]);
+  useEffect(() => {
+    setPasswordValidationResult(validatePassword(password));
+  }, [password]);
 
   const hadleLogin = async () => {
     try {
@@ -33,7 +55,6 @@ const Login = () => {
         setPassword("");
         setError("");
         router.replace("/");
-        return;
       }
     } catch (error) {
       console.log(error);
@@ -49,13 +70,17 @@ const Login = () => {
         <TextInput
           mode="outlined"
           label="Email"
-          style={styles.input}
-          outlineStyle={styles.inputOutline}
+          style={[styles.input]}
+          outlineStyle={[styles.inputOutline]}
           value={email}
           onChangeText={(value) => {
             setEmail(value);
           }}
+          error={!emailValidationResult.isValid}
         />
+        <HelperText type="error" visible={!emailValidationResult.isValid}>
+          {emailValidationResult.message}
+        </HelperText>
         <TextInput
           mode="outlined"
           style={styles.input}
@@ -65,7 +90,11 @@ const Login = () => {
           onChangeText={(value) => {
             setPassword(value);
           }}
+          error={!passwordValidationResult.isValid}
         />
+        <HelperText type="error" visible={!passwordValidationResult.isValid}>
+          {passwordValidationResult.message}
+        </HelperText>
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
         {error && (
           <View

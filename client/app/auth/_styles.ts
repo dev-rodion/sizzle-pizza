@@ -54,8 +54,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   input: {
-    marginBottom: 20,
+    marginTop: 20,
     fontSize: FontSize.medium,
+  },
+  invalid_input: {
+    borderColor: Colors.error,
+    color: Colors.error,
   },
   inputOutline: {
     borderRadius: Theme.borderRadius,
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontWeight: "700",
     fontSize: FontSize.medium,
+    marginTop: 30,
     marginBottom: 30,
   },
   buttomLink: {
