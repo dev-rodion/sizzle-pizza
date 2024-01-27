@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   headline: {
     marginTop: 20,
     fontWeight: "700",
-    // fontFamily: 'Mon',
     color: Colors.primary,
     textAlign: "center",
     fontSize: FontSize.xxLarge,

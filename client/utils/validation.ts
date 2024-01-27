@@ -3,6 +3,30 @@ export interface IValidation {
   message: string;
 }
 
+export const validateUsername = (username: string): IValidation => {
+  const result: IValidation = { isValid: true, message: "" };
+
+  if (!username) {
+    result.isValid = false;
+    result.message = "Username is required";
+    return result;
+  }
+
+  if (username.length < 3) {
+    result.isValid = false;
+    result.message = "Username must be at least 3 characters";
+    return result;
+  }
+
+  if (username.length > 20) {
+    result.isValid = false;
+    result.message = "Username must be at most 20 characters";
+    return result;
+  }
+
+  return result;
+};
+
 export const validateEmail = (email: string): IValidation => {
   const result: IValidation = { isValid: true, message: "" };
 
@@ -49,6 +73,27 @@ export const validatePassword = (
     result.isValid = false;
     result.message =
       "At least one uppercase letter, one lowercase letter, one number and one special character";
+    return result;
+  }
+
+  return result;
+};
+
+export const validatePasswordConfirm = (
+  passwordConfirm: string,
+  password: string
+) => {
+  const result: IValidation = { isValid: true, message: "" };
+
+  if (!passwordConfirm) {
+    result.isValid = false;
+    result.message = "Password confirmation is required";
+    return result;
+  }
+
+  if (passwordConfirm !== password) {
+    result.isValid = false;
+    result.message = "Password confirmation must match password";
     return result;
   }
 

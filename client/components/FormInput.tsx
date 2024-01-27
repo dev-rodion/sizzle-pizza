@@ -41,7 +41,7 @@ export default MyComponent;
 
 const styles = StyleSheet.create({
   input: {
-    marginTop: 20,
+    marginTop: 0,
     fontSize: FontSize.medium,
   },
   inputOutline: {

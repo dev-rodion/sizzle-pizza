@@ -2,35 +2,35 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   IFormState,
-  setEmail,
-  setEmailError,
+  setUsername,
+  setUsernameError,
 } from "../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
-import { validateEmail } from "../utils/validation";
+import { validateUsername } from "../utils/validation";
 import { FormInput } from ".";
 
-const EmailInput = () => {
+const UsernameInput = () => {
   const dispatch = useDispatch();
 
-  const { email, emailError }: IFormState = useSelector(
+  const { username, usernameError }: IFormState = useSelector(
     (state: any) => state.formFeature
   );
 
-  const handleEmailChange = (value: string) => {
+  const handleUsernameChange = (value: string) => {
     value = value.trim();
-    dispatch(setEmail(value));
-    const errorMessage = validateEmail(value).message;
-    dispatch(setEmailError(errorMessage));
+    dispatch(setUsername(value));
+    const errorMessage = validateUsername(value).message;
+    dispatch(setUsernameError(errorMessage));
   };
 
   return (
     <FormInput
-      label="Email"
-      value={email}
-      onChange={handleEmailChange}
-      errorMessage={emailError}
+      label="Username"
+      value={username}
+      onChange={handleUsernameChange}
+      errorMessage={usernameError}
     />
   );
 };
 
-export default EmailInput;
+export default UsernameInput;
