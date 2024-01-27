@@ -1,9 +1,8 @@
 import { Link } from "expo-router";
 import { Text } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
-import Layout from "../constants/Layout";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Colors from "../constants/Colors";
+import { Colors, Layout } from "../constants";
 
 const App = () => {
   return (

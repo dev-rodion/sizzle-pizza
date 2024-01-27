@@ -1,15 +1,12 @@
 import React from "react";
 import { TextInput, HelperText } from "react-native-paper";
-import FontSize from "../../constants/FontSize";
-import Theme from "../../constants/Theme";
-import Colors from "../../constants/Colors";
+import { Colors, FontSize, Theme } from "../constants";
 import { StyleSheet } from "react-native";
 
 interface IProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  error: boolean;
   errorMessage: string;
   secureTextEntry?: boolean;
 }
@@ -18,7 +15,6 @@ const MyComponent: React.FC<IProps> = ({
   label,
   value,
   onChange,
-  error,
   errorMessage,
   secureTextEntry = false,
 }) => {
@@ -29,12 +25,12 @@ const MyComponent: React.FC<IProps> = ({
         label={label}
         value={value}
         onChangeText={onChange}
-        error={error}
+        error={errorMessage !== ""}
         style={[styles.input]}
         outlineStyle={[styles.inputOutline]}
         secureTextEntry={secureTextEntry}
       />
-      <HelperText type="error" visible={error}>
+      <HelperText type="error" visible={errorMessage !== ""}>
         {errorMessage}
       </HelperText>
     </>

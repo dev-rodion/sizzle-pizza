@@ -18,7 +18,7 @@ const Register = () => {
         Create an account and you can order as much pizza as you want{" "}
       </Text>
       <View style={styles.formWrapper}>
-        <TextInput
+        {/* <TextInput
           mode="outlined"
           label="Username"
           value={email}
@@ -53,7 +53,7 @@ const Register = () => {
           style={styles.input}
           outlineStyle={styles.inputOutline}
           onChangeText={() => {}}
-        />
+        /> */}
         <Button
           style={[styles.button, { marginTop: 10 }]}
           labelStyle={styles.buttonLabel}

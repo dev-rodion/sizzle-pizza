@@ -3,9 +3,7 @@ import { Redirect, Slot, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Spacing from "../../constants/Spacing";
-import Colors from "../../constants/Colors";
-import Layout from "../../constants/Layout";
+import { Colors, Layout, Spacing } from "../../constants";
 import { useSelector } from "react-redux";
 // import * as SecureStore from 'expo-secure-store';
 

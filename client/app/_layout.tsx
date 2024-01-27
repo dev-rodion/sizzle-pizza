@@ -3,9 +3,6 @@ import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { PaperProvider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import colors from "../constants/Colors";
-import Theme from "../constants/Theme";
-import Layout from "../constants/Layout";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Header from "../components/Header";
 import { decode } from "base-64";
@@ -17,6 +14,7 @@ import {
   setToken,
   setUserData,
 } from "../redux/features/userFeatureSlice";
+import { Colors, Layout, Theme } from "../constants";
 
 const AppLayout = () => {
   global.atob = decode;
@@ -48,12 +46,12 @@ const AppLayout = () => {
             screenOptions={{
               headerTitle: "",
               header: () => <Header />,
-              tabBarActiveTintColor: colors.primary,
-              tabBarInactiveTintColor: colors.onBackground,
+              tabBarActiveTintColor: Colors.primary,
+              tabBarInactiveTintColor: Colors.onBackground,
               tabBarStyle: {
                 height: Layout.tabBarHeight,
-                backgroundColor: colors.background,
-                borderTopColor: colors.backdrop,
+                backgroundColor: Colors.background,
+                borderTopColor: Colors.backdrop,
               },
               tabBarItemStyle: {
                 borderRadius: 20,
