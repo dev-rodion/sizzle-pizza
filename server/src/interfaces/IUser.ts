@@ -4,7 +4,7 @@ interface IUser {
     username: string;
     email: string;
     password: string;
-    passwordRepeat?: string;
+    passwordConfirm?: string;
     createdAt: Date;
     updatedAt: Date;
 }

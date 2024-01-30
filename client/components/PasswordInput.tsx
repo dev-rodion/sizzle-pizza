@@ -7,7 +7,7 @@ import {
 } from "../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
 import { validatePassword } from "../utils/validation";
-import { FormInput } from ".";
+import FormInput from "./FormInput";
 
 const PasswordInput = () => {
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ const PasswordInput = () => {
       value={password}
       onChange={handlePasswordChange}
       errorMessage={passwordError}
+      secureTextEntry={true}
     />
   );
 };

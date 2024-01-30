@@ -12,7 +12,7 @@ export const ErrorNames = {
     USERNAME_INVALID: 'UsernameInvalid',
     EMAIL_INVALID: 'EmailInvalid',
     PASSWORD_INVALID: 'PasswordInvalid',
-    PASSWORD_REPEAT_INVALID: 'PasswordRepeatInvalid',
+    PASSWORD_CONFIRM_INVALID: 'PasswordConfirmInvalid',
 } as const;
 
 export type ErrorName = typeof ErrorNames[keyof typeof ErrorNames];

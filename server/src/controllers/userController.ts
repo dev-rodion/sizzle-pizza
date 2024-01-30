@@ -22,7 +22,7 @@ export const registerUser = async (req: Request, res: Response) => {
         return error.returnError(res);
     }
 
-    if (req.body.password !== req.body.passwordRepeat) {
+    if (req.body.password !== req.body.passwordConfirm) {
         const error: CustomError = errorsFactory.createError(ErrorNames.PASSWORDS_DONT_MATCH);
         return error.returnError(res);
     }

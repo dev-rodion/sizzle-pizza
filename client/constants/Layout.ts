@@ -8,7 +8,7 @@ const Layout = () => {
   // const insets = useSafeAreaInsets();
 
   const width: number = Dimensions.get("window").width;
-  const height: number = Dimensions.get("window").height - headerHeight - tabBarHeight //- insets.top - insets.bottom;
+  const height: number = Dimensions.get("window").height - headerHeight - tabBarHeight // - insets.top - insets.bottom;
 
   return {
     width,

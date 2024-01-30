@@ -8,9 +8,9 @@ export const validatePassword = (password: string): ErrorName | null => {
     return null;
 }
 
-export const validatePasswordRepeat = (password: string, passwordRepeat?: string): ErrorName | null => {
-    if (password !== passwordRepeat) {
-        return ErrorNames.PASSWORD_REPEAT_INVALID;
+export const validatePasswordConfirm = (password: string, passwordConfirm?: string): ErrorName | null => {
+    if (password !== passwordConfirm) {
+        return ErrorNames.PASSWORD_CONFIRM_INVALID;
     }
     return null;
 }

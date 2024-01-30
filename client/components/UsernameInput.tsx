@@ -7,7 +7,7 @@ import {
 } from "../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
 import { validateUsername } from "../utils/validation";
-import { FormInput } from ".";
+import FormInput from "./FormInput";
 
 const UsernameInput = () => {
   const dispatch = useDispatch();

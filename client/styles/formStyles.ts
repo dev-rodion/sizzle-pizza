@@ -23,4 +23,7 @@ export default StyleSheet.create({
     fontWeight: "700",
     fontSize: FontSize.medium,
   },
+  loadingWrapper: {
+    marginBottom: 30,
+  },
 });

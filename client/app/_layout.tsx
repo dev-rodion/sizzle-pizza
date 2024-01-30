@@ -16,15 +16,20 @@ import {
 } from "../redux/features/userFeatureSlice";
 import { Colors, Layout, Theme } from "../constants";
 
-const AppLayout = () => {
-  global.atob = decode;
+global.atob = decode;
 
+const AppLayout = () => {
   useEffect(() => {
     const checkToken = async () => {
       const token = await SecureStore.getItemAsync("userToken");
       if (token) {
-        const decodedToken: { _id: string; email: string; username: string, exp: number, iat: number } =
-          jwtDecode(token);
+        const decodedToken: {
+          _id: string;
+          email: string;
+          username: string;
+          exp: number;
+          iat: number;
+        } = jwtDecode(token);
         store.dispatch(setToken(token));
         const userData: IStateUserFeature = {
           _id: decodedToken._id,

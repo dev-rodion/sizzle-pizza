@@ -31,8 +31,8 @@ class ErrorFactory implements IErrorFactory {
                 return new CustomError('Email invalid', 400);
             case 'PasswordInvalid':
                 return new CustomError('Password invalid', 400);
-            case 'PasswordRepeatInvalid':
-                return new CustomError('Password repeat invalid', 400);
+            case 'PasswordConfirmInvalid':
+                return new CustomError('Password confirm invalid', 400);
             default:
                 return new CustomError('Unknown error', 500);
         }
