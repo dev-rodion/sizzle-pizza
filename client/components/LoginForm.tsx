@@ -31,7 +31,7 @@ const LoginForm = () => {
     (state: any) => state.formFeature
   );
 
-  const validateForm = () => {
+  const validateForm = (): boolean => {
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
 

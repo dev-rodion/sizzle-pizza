@@ -16,7 +16,6 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
             const error = errorsFactory.createError(ErrorNames.INVALID_TOKEN);
             return error.returnError(res);
         }
-        console.log(decode);
         return decode;
     });
     res.header({ 'user': user });

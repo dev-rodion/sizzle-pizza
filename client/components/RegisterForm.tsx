@@ -41,7 +41,7 @@ const RegisterForm = () => {
   const { username, email, password, passwordConfirm }: IFormState =
     useSelector((state: any) => state.formFeature);
 
-  const validateForm = () => {
+  const validateForm = (): boolean => {
     const usernameValidation = validateUsername(username);
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
@@ -76,16 +76,9 @@ const RegisterForm = () => {
     setError("");
 
     if (!validateForm()) {
-      console.log("====================================");
-      console.log("Form is not valid");
-      console.log("====================================");
       setIsLoading(false);
       return;
     }
-
-    console.log("====================================");
-    console.log("Form is valid");
-    console.log("====================================");
 
     try {
       const timetout = new Promise((resolve, reject) => {
