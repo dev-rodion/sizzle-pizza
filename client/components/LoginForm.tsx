@@ -86,8 +86,8 @@ const LoginForm = () => {
   }, [dispatch, email, password, validateForm, setError, router]);
 
   useEffect(() => {
-    dispatch(setEmail("test@gmail.com"));
-    dispatch(setPassword("Karas132@"));
+    // dispatch(setEmail("test@gmail.com"));
+    // dispatch(setPassword("Karas132@"));
     return () => {
       dispatch(setEmail(""));
       dispatch(setPassword(""));
