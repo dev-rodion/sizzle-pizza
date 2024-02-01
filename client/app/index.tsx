@@ -16,7 +16,7 @@ const App = () => {
         }}
       >
         <Text variant="displayMedium">Home Page</Text>
-        <Link href="/auth/register">
+        <Link href="/auth/">
           <Text variant="bodyLarge">Login</Text>
         </Link>
       </SafeAreaView>

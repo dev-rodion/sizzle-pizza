@@ -1,7 +1,6 @@
 export const envVariables: string[] = [
     'PORT',
     'MONGO_URL',
-    'MONGO_DB',
     'JWT_SECRET',
     'JWT_EXPIRES_IN',
 ]

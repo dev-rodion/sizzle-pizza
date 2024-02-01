@@ -1,10 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  IFormState,
-  setEmail,
-  setEmailError,
-} from "../../redux/features/formFeatureSlice";
+import { IFormState, setEmail, setEmailError } from "../../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
 import { validateEmail } from "../../utils/validation";
 import FormInput from "./FormInput";
@@ -12,9 +8,7 @@ import FormInput from "./FormInput";
 const EmailInput = () => {
   const dispatch = useDispatch();
 
-  const { email, emailError }: IFormState = useSelector(
-    (state: any) => state.formFeature
-  );
+  const { email, emailError }: IFormState = useSelector((state: any) => state.formFeature);
 
   const handleEmailChange = (value: string) => {
     value = value.trim();
@@ -25,7 +19,7 @@ const EmailInput = () => {
 
   return (
     <FormInput
-      label="Email"
+      placeholder="Enter your email address"
       value={email}
       onChange={handleEmailChange}
       errorMessage={emailError}

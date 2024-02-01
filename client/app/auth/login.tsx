@@ -14,11 +14,6 @@ const Login = () => {
     <View style={[styles.container, { opacity: loading ? 0 : 1 }]}>
       <Text style={[styles.headline]}>Login here</Text>
       <Text style={styles.bodyText}>Welcome back!</Text>
-      <TextInput
-        placeholder="Usernamesdfakjlasdfjkl ajklasdfjklfsdajjkl"
-        style={{ color: "white" }}
-        placeholderTextColor={"white"}
-      />
       <LoginForm />
     </View>
   );

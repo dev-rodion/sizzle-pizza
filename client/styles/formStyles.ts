@@ -11,7 +11,10 @@ export default StyleSheet.create({
     color: Colors.primary,
     fontWeight: "700",
     fontSize: FontSize.medium,
-    marginBottom: 30,
+    marginTop: 25,
+  },
+  button: {
+    marginTop: 30,
   },
   buttomLink: {
     textAlign: "center",
@@ -24,6 +27,5 @@ export default StyleSheet.create({
     fontSize: FontSize.medium,
   },
   loadingWrapper: {
-    marginBottom: 30,
   },
 });

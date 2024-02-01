@@ -35,11 +35,12 @@ export const registerUser = async (req: Request, res: Response) => {
     password: hashedPassword,
     phoneNumber: req.body.phoneNumber,
     address: {
-      country: req.body.country,
-      city: req.body.city,
-      street: req.body.street,
-      zip: req.body.zip,
+      country: req.body.address.country,
+      city: req.body.address.city,
+      street: req.body.address.street,
+      zip: req.body.address.zip,
     },
+    avatarUrl: req.body?.avatarUrl,
     createdAt: new Date(),
   });
 
@@ -48,6 +49,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const token = generateToken(user);
     res.status(201).json({ token });
   } catch (err) {
+    console.log(err);
     const error: CustomError = errorsFactory.createError(ErrorNames.REGISTER_ERROR);
     return error.returnError(res);
   }

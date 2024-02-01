@@ -1,10 +1,15 @@
 import React from "react";
-import { Appbar } from "react-native-paper";
+import { Appbar, Avatar } from "react-native-paper";
 import { Router, useRouter } from "expo-router";
 import { Layout } from "../../constants";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Header = () => {
   const router: Router = useRouter();
+
+  const { avatarUrl } = useSelector((state: RootState) => state.userFeature);
+  console.log(avatarUrl); // https://i.pravatar.cc/150?img=3
 
   const showBackButton = router.canGoBack();
 
@@ -22,7 +27,6 @@ const Header = () => {
           router.push("/auth/login");
         }}
       /> */}
-      {/* <Avatar.Text size={40} label="XD" style={{ margin: 7 }} /> */}
     </Appbar.Header>
   );
 };

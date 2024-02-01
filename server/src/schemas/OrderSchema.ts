@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 import { IOrder } from "../interfaces";
 
 const OrderSchema: Schema = new Schema<IOrder>({
-  userId: { type: Number, required: true },
+  userId: { type: Schema.Types.ObjectId, required: true },
   totalPrice: { type: Number, required: true },
   deliveryAddress: {
     street: { type: String, required: true },

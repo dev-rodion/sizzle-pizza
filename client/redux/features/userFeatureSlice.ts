@@ -62,6 +62,6 @@ export const userFeatureSlice = createSlice({
   },
 });
 
-export const { setUserData, setToken } = userFeatureSlice.actions;
+export const { setUserData, setToken, clearUserData } = userFeatureSlice.actions;
 
 export default userFeatureSlice.reducer;

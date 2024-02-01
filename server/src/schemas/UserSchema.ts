@@ -12,6 +12,7 @@ const UserSchema: Schema = new Schema<IUser>({
     street: { type: String, required: true },
     zip: { type: String, required: true },
   },
+  avatarUrl: { type: String, required: false },
   createdAt: { type: Date, required: true },
 });
 

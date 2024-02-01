@@ -25,7 +25,7 @@ const PasswordInput = () => {
 
   return (
     <FormInput
-      label="Password"
+    placeholder="Enter your password"
       value={password}
       onChange={handlePasswordChange}
       errorMessage={passwordError}

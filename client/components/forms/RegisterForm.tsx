@@ -10,11 +10,17 @@ import PasswordInput from "./PasswordInput";
 import UsernameInput from "./UsernameInput";
 import { formStyles } from "../../styles";
 import { Link, useRouter } from "expo-router";
-import { validateEmail, validatePassword, validatePasswordConfirm, validateUsername } from "../../utils/validation";
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordConfirm,
+  validateUsername,
+} from "../../utils/validation";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   IFormState,
+  clearForm,
   setEmail,
   setEmailError,
   setPassword,
@@ -27,6 +33,8 @@ import {
 import { registerUser } from "../../api/auth";
 import * as SecureStore from "expo-secure-store";
 import { MaskedTextInput } from "react-native-mask-text";
+import PhoneNumberInput from "./PhoneNumberInput";
+import AddressInput from "./AddressInput";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -34,7 +42,9 @@ const RegisterForm = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { username, email, password, passwordConfirm }: IFormState = useSelector((state: any) => state.formFeature);
+  const { username, email, password, passwordConfirm }: IFormState = useSelector(
+    (state: any) => state.formFeature
+  );
 
   const validateForm = (): boolean => {
     const usernameValidation = validateUsername(username);
@@ -79,11 +89,12 @@ const RegisterForm = () => {
         }, 5000);
       });
 
-      const data = await Promise.race([registerUser(username, email, password, passwordConfirm), timetout]).catch(
-        (err) => {
-          throw new Error(err.message);
-        }
-      );
+      const data = await Promise.race([
+        registerUser(username, email, password, passwordConfirm),
+        timetout,
+      ]).catch((err) => {
+        throw new Error(err.message);
+      });
 
       if (data.hasOwnProperty("message")) {
         setError(data.message);
@@ -103,20 +114,8 @@ const RegisterForm = () => {
   };
 
   useEffect(() => {
-    dispatch(setUsername("Test User"));
-    dispatch(setEmail("test@gmail.com"));
-    dispatch(setPassword("Test132@"));
-    dispatch(setPasswordConfirm("Test132@"));
-
     return () => {
-      dispatch(setUsername(""));
-      dispatch(setUsernameError(""));
-      dispatch(setEmail(""));
-      dispatch(setEmailError(""));
-      dispatch(setPassword(""));
-      dispatch(setPasswordError(""));
-      dispatch(setPasswordConfirm(""));
-      dispatch(setPasswordConfirmError(""));
+      dispatch(clearForm());
     };
   }, [dispatch]);
 
@@ -126,44 +125,11 @@ const RegisterForm = () => {
       <EmailInput />
       <PasswordInput />
       <PasswordConfirmInput />
-      <TextInput
-        mode="outlined"
-        label={"Phone Number"}
-        inputMode="numeric"
-        placeholder="+420 XXX XXX XXX"
-        render={(props) => (
-          <MaskedTextInput
-            {...props}
-            mask="+420 999 999 999"
-            onChangeText={(text, rawText) => {
-              console.log(text);
-              console.log(rawText);
-            }}
-          />
-        )}
-      />
-      <TextInput mode="outlined" label={"Street"} />
-      <TextInput mode="outlined" label={"City"} />
-      <TextInput mode="outlined" label={"Country"} inputMode="numeric" />
-      <TextInput
-        mode="outlined"
-        label={"Zip Code"}
-        placeholder="XXX XX"
-        render={(props) => (
-          <MaskedTextInput
-            {...props}
-            mask="999 99"
-            onChangeText={(text, rawText) => {
-              console.log(text);
-              console.log(rawText);
-            }}
-          />
-        )}
-      />
-      {/* <TextInput label="Phone number" render={(props) => <TextInputMask mask="+[00] [000] [000] [000]" />} /> */}
+      <PhoneNumberInput />
+      <AddressInput />
       {error && <ErrorBox>{error}</ErrorBox>}
       {isLoading && <Loading style={formStyles.loadingWrapper} />}
-      <Button mode="contained" onPress={handleRegister} style={{ marginTop: 10 }}>
+      <Button mode="contained" onPress={handleRegister} style={formStyles.button}>
         Sing Up
       </Button>
       <Link href="/auth/login" style={formStyles.buttomLink}>

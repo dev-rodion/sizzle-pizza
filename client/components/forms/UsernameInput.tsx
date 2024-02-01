@@ -25,7 +25,7 @@ const UsernameInput = () => {
 
   return (
     <FormInput
-      label="Username"
+      placeholder="Enter your full name"
       value={username}
       onChange={handleUsernameChange}
       errorMessage={usernameError}

@@ -1,8 +1,7 @@
 import { ErrorName, ErrorNames } from "../errors/ErrorName";
 
 export const validatePassword = (password: string): ErrorName | null => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/; //? Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
-    if (!password || !passwordRegex.test(password)) {
+    if (!password || password.length < 6) {
         return ErrorNames.PASSWORD_INVALID;
     }
     return null;

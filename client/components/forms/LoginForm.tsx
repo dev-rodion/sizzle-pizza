@@ -7,6 +7,7 @@ import { loginUser } from "../../api/auth";
 import { useSelector } from "react-redux";
 import {
   IFormState,
+  clearForm,
   setEmail,
   setEmailError,
   setPassword,
@@ -27,9 +28,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { email, password }: IFormState = useSelector(
-    (state: any) => state.formFeature
-  );
+  const { email, password }: IFormState = useSelector((state: any) => state.formFeature);
 
   const validateForm = (): boolean => {
     const emailValidation = validateEmail(email);
@@ -61,10 +60,7 @@ const LoginForm = () => {
         }, 5000);
       });
 
-      const data = await Promise.race([
-        loginUser(email, password),
-        timeout,
-      ]).catch((err) => {
+      const data = await Promise.race([loginUser(email, password), timeout]).catch((err) => {
         throw new Error(err.message);
       });
 
@@ -86,13 +82,8 @@ const LoginForm = () => {
   }, [dispatch, email, password, validateForm, setError, router]);
 
   useEffect(() => {
-    // dispatch(setEmail("test@gmail.com"));
-    // dispatch(setPassword("Karas132@"));
     return () => {
-      dispatch(setEmail(""));
-      dispatch(setPassword(""));
-      dispatch(setEmailError(""));
-      dispatch(setPasswordError(""));
+      dispatch(clearForm());
     };
   }, [dispatch]);
 
@@ -101,9 +92,11 @@ const LoginForm = () => {
       <EmailInput />
       <PasswordInput />
       <Text style={formStyles.forgotPassword}>Forgot your password?</Text>
-      {error && <ErrorBox>{error}</ErrorBox>}
-      {isLoading && <Loading style={formStyles.loadingWrapper} />}
-      <Button mode="contained" onPress={handleLogin}>
+      <View style={{ marginTop: 20 }}>
+        {error && <ErrorBox>{error}</ErrorBox>}
+        {isLoading && <Loading style={formStyles.loadingWrapper} />}
+      </View>
+      <Button mode="contained" onPress={handleLogin} style={formStyles.button}>
         Login
       </Button>
       <Link href="/auth/register" style={formStyles.buttomLink}>

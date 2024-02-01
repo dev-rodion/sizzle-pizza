@@ -28,7 +28,7 @@ const PasswordConfirmInput = () => {
 
   return (
     <FormInput
-      label="Password Confirm"
+      placeholder="Confirm your password"
       value={passwordConfirm}
       onChange={handlePasswordConfirmChange}
       errorMessage={passwordConfirmError}

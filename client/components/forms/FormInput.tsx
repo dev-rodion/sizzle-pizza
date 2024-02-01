@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TextInput, HelperText } from "react-native-paper";
 import { Colors, FontSize, Theme } from "../../constants";
-import { StyleSheet } from "react-native";
+import { InputModeOptions, StyleSheet } from "react-native";
 
 interface IProps {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  errorMessage: string;
+  label?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  errorMessage?: string;
   secureTextEntry?: boolean;
+  render?: (props: any) => JSX.Element;
+  inputMode?: InputModeOptions;
+  placeholder?: string;
 }
 
 const MyComponent: React.FC<IProps> = ({
@@ -17,6 +20,9 @@ const MyComponent: React.FC<IProps> = ({
   onChange,
   errorMessage,
   secureTextEntry = false,
+  render: Render,
+  inputMode,
+  placeholder,
 }) => {
   return (
     <>
@@ -29,20 +35,30 @@ const MyComponent: React.FC<IProps> = ({
         style={[styles.input]}
         outlineStyle={[styles.inputOutline]}
         secureTextEntry={secureTextEntry}
+        render={Render}
+        inputMode={inputMode}
+        placeholder={placeholder}
+        placeholderTextColor={Colors.onSurfaceDisabled}
       />
-      <HelperText type="error" visible={errorMessage !== ""}>
-        {errorMessage}
-      </HelperText>
+      {errorMessage !== "" && (
+        <HelperText type="error" visible={errorMessage !== ""}>
+          {errorMessage}
+        </HelperText>
+      )}
     </>
   );
 };
 
-export default MyComponent;
+export default React.memo(MyComponent);
 
 const styles = StyleSheet.create({
   input: {
-    marginTop: 0,
+    marginTop: 25,
     fontSize: FontSize.medium,
+    height: 50,
+    fontStyle: "italic",
+    lineHeight: FontSize.medium * 1.5,
+    paddingVertical: 0,
   },
   inputOutline: {
     borderRadius: Theme.borderRadius,

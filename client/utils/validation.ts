@@ -61,28 +61,16 @@ export const validatePassword = (
     return result;
   }
 
-  if (password.length < 8) {
+  if (password.length < 6) {
     result.isValid = false;
-    result.message = "Password must be at least 8 characters";
-    return result;
-  }
-
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/; //? Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
-  if (!password || !passwordRegex.test(password)) {
-    result.isValid = false;
-    result.message =
-      "At least one uppercase letter, one lowercase letter, one number and one special character";
+    result.message = "Password must be at least 6 characters";
     return result;
   }
 
   return result;
 };
 
-export const validatePasswordConfirm = (
-  passwordConfirm: string,
-  password: string
-) => {
+export const validatePasswordConfirm = (passwordConfirm: string, password: string) => {
   const result: IValidation = { isValid: true, message: "" };
 
   if (!passwordConfirm) {

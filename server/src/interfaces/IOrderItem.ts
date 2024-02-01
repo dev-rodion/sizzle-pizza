@@ -1,7 +1,9 @@
+import { Schema } from "mongoose";
+
 interface IOrderItem {
   _id: number;
-  orderId: number;
-  pizzaId: number;
+  orderId: Schema.Types.ObjectId;
+  pizzaId: Schema.Types.ObjectId;
   size: string;
   quantity: number;
   price: number;

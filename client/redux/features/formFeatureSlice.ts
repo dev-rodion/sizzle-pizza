@@ -12,6 +12,19 @@ export interface IFormState {
 
   passwordConfirm: string;
   passwordConfirmError: string;
+
+  phoneNumber: string;
+  phoneNumberError: string;
+
+  address: {
+    country: string;
+    city: string;
+    street: string;
+    zip: string;
+  };
+  addressError: { country: string; city: string; street: string; zip: string };
+
+  avatarUrl: string;
 }
 
 const initialState: IFormState = {
@@ -26,6 +39,24 @@ const initialState: IFormState = {
 
   passwordConfirm: "",
   passwordConfirmError: "",
+
+  phoneNumber: "",
+  phoneNumberError: "",
+
+  address: {
+    country: "",
+    city: "",
+    street: "",
+    zip: "",
+  },
+  addressError: {
+    country: "",
+    city: "",
+    street: "",
+    zip: "",
+  },
+
+  avatarUrl: "",
 };
 
 export const formFeatureSlice = createSlice({
@@ -59,6 +90,56 @@ export const formFeatureSlice = createSlice({
     setPasswordConfirmError: (state, action) => {
       state.passwordConfirmError = action.payload;
     },
+
+    setPhoneNumber: (state, action) => {
+      state.phoneNumber = action.payload;
+    },
+    setPhoneNumberError: (state, action) => {
+      state.phoneNumberError = action.payload;
+    },
+
+    setAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    setAddressError: (state, action) => {
+      state.addressError = action.payload;
+    },
+
+    setAvatarUrl: (state, action) => {
+      state.avatarUrl = action.payload;
+    },
+
+    clearForm: (state) => {
+      state.username = "";
+      state.usernameError = "";
+
+      state.email = "";
+      state.emailError = "";
+
+      state.password = "";
+      state.passwordError = "";
+
+      state.passwordConfirm = "";
+      state.passwordConfirmError = "";
+
+      state.phoneNumber = "";
+      state.phoneNumberError = "";
+
+      state.address = {
+        country: "",
+        city: "",
+        street: "",
+        zip: "",
+      };
+      state.addressError = {
+        country: "",
+        city: "",
+        street: "",
+        zip: "",
+      };
+
+      state.avatarUrl = "";
+    },
   },
 });
 
@@ -74,6 +155,16 @@ export const {
 
   setPasswordConfirm,
   setPasswordConfirmError,
+
+  setPhoneNumber,
+  setPhoneNumberError,
+
+  setAddress,
+  setAddressError,
+
+  setAvatarUrl,
+
+  clearForm,
 } = formFeatureSlice.actions;
 
 export default formFeatureSlice.reducer;
