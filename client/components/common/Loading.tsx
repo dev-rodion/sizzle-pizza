@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import { Colors } from "../constants";
+import { Colors } from "../../constants";
 
 const Loading = ({ style }: { style?: any }) => {
   return (

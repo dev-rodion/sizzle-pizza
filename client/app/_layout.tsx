@@ -4,7 +4,7 @@ import { store } from "../redux/store";
 import { PaperProvider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import { decode } from "base-64";
 import { useEffect } from "react";
 import * as SecureStore from "expo-secure-store";

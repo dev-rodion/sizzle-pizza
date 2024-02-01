@@ -7,9 +7,9 @@ const UserSchema: Schema = new Schema<IUser>({
   phoneNumber: { type: String, required: true },
   password: { type: String, required: true },
   address: {
-    street: { type: String, required: true },
+    country: { type: String, required: true },
     city: { type: String, required: true },
-    state: { type: String, required: true },
+    street: { type: String, required: true },
     zip: { type: String, required: true },
   },
   createdAt: { type: Date, required: true },

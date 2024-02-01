@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Button, ButtonProps } from "react-native-paper";
-import { FontSize, Theme } from "../constants";
+import { FontSize, Theme } from "../../constants";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 interface Props {

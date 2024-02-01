@@ -4,6 +4,14 @@ export interface IStateUserFeature {
   _id: string | null;
   username: string | null;
   email: string | null;
+  phoneNumber: string | null;
+  address: {
+    country: string | null;
+    city: string | null;
+    street: string | null;
+    zip: string | null;
+  };
+  avatarUrl?: string | null;
   token: string | null;
 }
 
@@ -11,6 +19,14 @@ const initialState: IStateUserFeature = {
   _id: null,
   username: null,
   email: null,
+  phoneNumber: null,
+  address: {
+    country: null,
+    street: null,
+    city: null,
+    zip: null,
+  },
+  avatarUrl: null,
   token: null,
 };
 
@@ -22,6 +38,9 @@ export const userFeatureSlice = createSlice({
       state._id = action.payload._id;
       state.username = action.payload.username;
       state.email = action.payload.email;
+      state.phoneNumber = action.payload.phoneNumber;
+      state.address = action.payload.address;
+      state.avatarUrl = action.payload.avatarUrl;
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
@@ -31,6 +50,14 @@ export const userFeatureSlice = createSlice({
       state.username = null;
       state.email = null;
       state.token = null;
+      state.phoneNumber = null;
+      state.address = {
+        country: null,
+        city: null,
+        street: null,
+        zip: null,
+      };
+      state.avatarUrl = null;
     },
   },
 });

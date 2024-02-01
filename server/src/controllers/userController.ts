@@ -35,9 +35,9 @@ export const registerUser = async (req: Request, res: Response) => {
     password: hashedPassword,
     phoneNumber: req.body.phoneNumber,
     address: {
-      street: req.body.street,
+      country: req.body.country,
       city: req.body.city,
-      state: req.body.state,
+      street: req.body.street,
       zip: req.body.zip,
     },
     createdAt: new Date(),

@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInput, HelperText } from "react-native-paper";
-import { Colors, FontSize, Theme } from "../constants";
+import { Colors, FontSize, Theme } from "../../constants";
 import { StyleSheet } from "react-native";
 
 interface IProps {

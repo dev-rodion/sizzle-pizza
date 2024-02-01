@@ -4,9 +4,9 @@ import {
   IFormState,
   setUsername,
   setUsernameError,
-} from "../redux/features/formFeatureSlice";
+} from "../../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
-import { validateUsername } from "../utils/validation";
+import { validateUsername } from "../../utils/validation";
 import FormInput from "./FormInput";
 
 const UsernameInput = () => {

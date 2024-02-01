@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { loginUser } from "../api/auth";
+import { loginUser } from "../../api/auth";
 import { useSelector } from "react-redux";
 import {
   IFormState,
@@ -11,15 +11,15 @@ import {
   setEmailError,
   setPassword,
   setPasswordError,
-} from "../redux/features/formFeatureSlice";
+} from "../../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
-import { validateEmail, validatePassword } from "../utils/validation";
-import Button from "./Button";
+import { validateEmail, validatePassword } from "../../utils/validation";
+import Button from "../common/Button";
 import EmailInput from "./EmailInput";
-import ErrorBox from "./ErrorBox";
-import Loading from "./Loading";
+import ErrorBox from "../common/ErrorBox";
+import Loading from "../common/Loading";
 import PasswordInput from "./PasswordInput";
-import { formStyles } from "../styles";
+import { formStyles } from "../../styles";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

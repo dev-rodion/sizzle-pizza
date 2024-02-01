@@ -3,6 +3,7 @@ import { Text } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors, Layout } from "../constants";
+import { MaskedTextInput } from "react-native-mask-text";
 
 const App = () => {
   return (

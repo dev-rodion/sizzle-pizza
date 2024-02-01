@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
-import Button from "./Button";
+import { Text, TextInput } from "react-native-paper";
+import Button from "../common/Button";
 import EmailInput from "./EmailInput";
-import ErrorBox from "./ErrorBox";
-import Loading from "./Loading";
+import ErrorBox from "../common/ErrorBox";
+import Loading from "../common/Loading";
 import PasswordConfirmInput from "./PasswordConfirmInput";
 import PasswordInput from "./PasswordInput";
 import UsernameInput from "./UsernameInput";
-import { formStyles } from "../styles";
+import { formStyles } from "../../styles";
 import { Link, useRouter } from "expo-router";
-import {
-  validateEmail,
-  validatePassword,
-  validatePasswordConfirm,
-  validateUsername,
-} from "../utils/validation";
+import { validateEmail, validatePassword, validatePasswordConfirm, validateUsername } from "../../utils/validation";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
@@ -28,9 +23,10 @@ import {
   setPasswordError,
   setUsername,
   setUsernameError,
-} from "../redux/features/formFeatureSlice";
-import { registerUser } from "../api/auth";
+} from "../../redux/features/formFeatureSlice";
+import { registerUser } from "../../api/auth";
 import * as SecureStore from "expo-secure-store";
+import { MaskedTextInput } from "react-native-mask-text";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -38,17 +34,13 @@ const RegisterForm = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { username, email, password, passwordConfirm }: IFormState =
-    useSelector((state: any) => state.formFeature);
+  const { username, email, password, passwordConfirm }: IFormState = useSelector((state: any) => state.formFeature);
 
   const validateForm = (): boolean => {
     const usernameValidation = validateUsername(username);
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
-    const passwordConfirmValidation = validatePasswordConfirm(
-      passwordConfirm,
-      password
-    );
+    const passwordConfirmValidation = validatePasswordConfirm(passwordConfirm, password);
 
     if (!usernameValidation.isValid) {
       dispatch(setUsernameError(usernameValidation.message));
@@ -87,12 +79,11 @@ const RegisterForm = () => {
         }, 5000);
       });
 
-      const data = await Promise.race([
-        registerUser(username, email, password, passwordConfirm),
-        timetout,
-      ]).catch((err) => {
-        throw new Error(err.message);
-      });
+      const data = await Promise.race([registerUser(username, email, password, passwordConfirm), timetout]).catch(
+        (err) => {
+          throw new Error(err.message);
+        }
+      );
 
       if (data.hasOwnProperty("message")) {
         setError(data.message);
@@ -135,13 +126,44 @@ const RegisterForm = () => {
       <EmailInput />
       <PasswordInput />
       <PasswordConfirmInput />
+      <TextInput
+        mode="outlined"
+        label={"Phone Number"}
+        inputMode="numeric"
+        placeholder="+420 XXX XXX XXX"
+        render={(props) => (
+          <MaskedTextInput
+            {...props}
+            mask="+420 999 999 999"
+            onChangeText={(text, rawText) => {
+              console.log(text);
+              console.log(rawText);
+            }}
+          />
+        )}
+      />
+      <TextInput mode="outlined" label={"Street"} />
+      <TextInput mode="outlined" label={"City"} />
+      <TextInput mode="outlined" label={"Country"} inputMode="numeric" />
+      <TextInput
+        mode="outlined"
+        label={"Zip Code"}
+        placeholder="XXX XX"
+        render={(props) => (
+          <MaskedTextInput
+            {...props}
+            mask="999 99"
+            onChangeText={(text, rawText) => {
+              console.log(text);
+              console.log(rawText);
+            }}
+          />
+        )}
+      />
+      {/* <TextInput label="Phone number" render={(props) => <TextInputMask mask="+[00] [000] [000] [000]" />} /> */}
       {error && <ErrorBox>{error}</ErrorBox>}
       {isLoading && <Loading style={formStyles.loadingWrapper} />}
-      <Button
-        mode="contained"
-        onPress={handleRegister}
-        style={{ marginTop: 10 }}
-      >
+      <Button mode="contained" onPress={handleRegister} style={{ marginTop: 10 }}>
         Sing Up
       </Button>
       <Link href="/auth/login" style={formStyles.buttomLink}>

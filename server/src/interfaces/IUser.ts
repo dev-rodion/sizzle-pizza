@@ -6,9 +6,9 @@ interface IUser {
   password: string;
   passwordConfirm?: string;
   address: {
-    street: string;
+    country: string;
     city: string;
-    state: string;
+    street: string;
     zip: string;
   };
   avatarUrl?: string;

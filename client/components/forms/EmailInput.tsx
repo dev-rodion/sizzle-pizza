@@ -4,9 +4,9 @@ import {
   IFormState,
   setEmail,
   setEmailError,
-} from "../redux/features/formFeatureSlice";
+} from "../../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
-import { validateEmail } from "../utils/validation";
+import { validateEmail } from "../../utils/validation";
 import FormInput from "./FormInput";
 
 const EmailInput = () => {

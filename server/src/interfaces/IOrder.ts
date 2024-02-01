@@ -5,7 +5,6 @@ interface IOrder {
   deliveryAddress: {
     street: string;
     city: string;
-    state: string;
     zip: string;
   };
   status: string;

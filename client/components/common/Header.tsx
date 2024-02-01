@@ -1,7 +1,7 @@
 import React from "react";
 import { Appbar } from "react-native-paper";
 import { Router, useRouter } from "expo-router";
-import { Layout } from "../constants";
+import { Layout } from "../../constants";
 
 const Header = () => {
   const router: Router = useRouter();

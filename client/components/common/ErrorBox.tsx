@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import { Colors, FontSize, Theme } from "../constants";
+import { Colors, FontSize, Theme } from "../../constants";
 
 const ErrorBox = ({ children }: { children: ReactNode }) => {
   return (

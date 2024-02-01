@@ -4,9 +4,9 @@ import {
   IFormState,
   setPassword,
   setPasswordError,
-} from "../redux/features/formFeatureSlice";
+} from "../../redux/features/formFeatureSlice";
 import { useDispatch } from "react-redux";
-import { validatePassword } from "../utils/validation";
+import { validatePassword } from "../../utils/validation";
 import FormInput from "./FormInput";
 
 const PasswordInput = () => {
